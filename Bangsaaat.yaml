@@ -1,0 +1,75 @@
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 0.0.0.0:9090
+
+proxies:
+  - name: 24ma
+    type: vmess
+    server: ava.game.naver.com
+    port: 443
+    uuid: f893266c-4cdd-456e-92b6-a9c35344d090
+    alterId: 0
+    cipher: auto
+    network: ws
+    tls: true
+    skip-cert-verify: false
+    ws-opts:
+      path: /vmessws
+      headers:
+        Host: ava.game.naver.com.id1.ubaistore.my.id
+
+  - name: opok
+    type: vless
+    server: your.server.com
+    port: 443
+    uuid: 22222222-2222-2222-2222-222222222222
+    cipher: auto
+    tls: true
+    udp: true
+    network: grpc
+
+  - name: opok2
+    type: vless
+    server: your.server.com
+    port: 443
+    uuid: 33333333-3333-3333-3333-333333333333
+    cipher: auto
+    tls: true
+    udp: true
+    network: grpc
+
+  - name: opok3
+    type: vless
+    server: your.server.com
+    port: 443
+    uuid: 44444444-4444-4444-4444-444444444444
+    cipher: auto
+    tls: true
+    udp: true
+    network: ws
+
+proxy-groups:
+  - name: BESTPING
+    type: url-test
+    proxies:
+      - 24ma
+      - opok
+      - opok2
+      - opok3
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: FALLBACK
+    type: fallback
+    proxies:
+      - 24ma
+      - opok
+      - opok2
+      - opok3
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+
+rules:
+  - MATCH, BESTPING

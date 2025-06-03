@@ -22,6 +22,56 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
 
+  - name: SELECTOR
+    type: select
+    proxies:
+      - Manual XUTP
+      - Manual ADDON
+      - Manual Opok
+      - Manual 0pok2
+      - Manual VID
+      - Manual EX
+
+  - name: URL-TEST
+    type: url-test
+    proxies:
+      - Manual XUTP
+      - Manual ADDON
+      - Manual Opok
+      - Manual 0pok2
+      - Manual VID
+      - Manual EX
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: FALLBACK
+    type: fallback
+    proxies:
+      - Manual XUTP
+      - Manual ADDON
+      - Manual Opok
+      - Manual 0pok2
+      - Manual VID
+      - Manual EX
+
+  - name: LOAD-BALANCE
+    type: load-balance
+    proxies:
+      - Manual XUTP
+      - Manual ADDON
+      - Manual Opok
+      - Manual 0pok2
+      - Manual VID
+      - Manual EX
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: RELAY
+    type: relay
+    proxies:
+      - Manual XUTP
+      - Manual ADDON
+
 proxies:
   - name: Manual XUTP
     type: vmess
@@ -54,16 +104,16 @@ proxies:
         Host: investor.fb.com.allstorevpn.premm.shop
 
   - name: Manual Opok
+    type: vmess
     server: api.ovo.id
     port: 80
-    type: vmess
-    udp: true
-    skip-cert-verify: true
     uuid: 3f8a4568-7bb6-42b5-af5d-d92824d5499f
-    cipher: auto
     alterId: 0
-    tls: false
+    cipher: auto
     network: ws
+    tls: false
+    skip-cert-verify: true
+    udp: true
     ws-opts:
       path: /vmess
       headers:
@@ -98,15 +148,15 @@ proxies:
     servername: simplevpn.my.id
 
   - name: Manual EX
+    type: trojan
     server: 104.21.18.144
     port: 443
-    type: trojan
-    udp: true
-    skip-cert-verify: true
     password: 6884d714-d3c4-4b49-aa20-767ea92837d6
     tls: true
+    skip-cert-verify: true
     sni: icecream.955850.xyz
     network: ws
+    udp: true
     ws-opts:
       path: /proxyip=45.67.215.153:443&proxyIP=null
       headers:

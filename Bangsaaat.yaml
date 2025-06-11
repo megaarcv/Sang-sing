@@ -1,166 +1,84 @@
-proxy-groups:
-  - name: ACC VPN
-    type: select
-    proxies:
-      - Auto Best
-      - Manual XUTP
-      - Manual ADDON
-      - Manual Opok
-      - Manual 0pok2
-      - Manual VID
-      - Manual EX
-
-  - name: Auto Best
-    type: url-test
-    proxies:
-      - Manual XUTP
-      - Manual ADDON
-      - Manual Opok
-      - Manual 0pok2
-      - Manual VID
-      - Manual EX
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-
-  - name: SELECTOR
-    type: select
-    proxies:
-      - Manual XUTP
-      - Manual ADDON
-      - Manual Opok
-      - Manual 0pok2
-      - Manual VID
-      - Manual EX
-
-  - name: URL-TEST
-    type: url-test
-    proxies:
-      - Manual XUTP
-      - Manual ADDON
-      - Manual Opok
-      - Manual 0pok2
-      - Manual VID
-      - Manual EX
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-
-  - name: FALLBACK
-    type: fallback
-    proxies:
-      - Manual XUTP
-      - Manual ADDON
-      - Manual Opok
-      - Manual 0pok2
-      - Manual VID
-      - Manual EX
-
-  - name: LOAD-BALANCE
-    type: load-balance
-    proxies:
-      - Manual XUTP
-      - Manual ADDON
-      - Manual Opok
-      - Manual 0pok2
-      - Manual VID
-      - Manual EX
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-
-  - name: RELAY
-    type: relay
-    proxies:
-      - Manual XUTP
-      - Manual ADDON
-
 proxies:
-  - name: Manual XUTP
+  # === VLESS Nodes ===
+  - name: VLESS - ava.game.naver.com
+    type: vless
+    server: ava.game.naver.com
+    port: 443
+    uuid: 4d038edf-dbf2-45d8-a7cf-3ca1cdc037a5
+    tls: true
+    servername: ava.game.naver.com.vip.prozect.xyz
+    network: ws
+    ws-opts:
+      path: /vless
+      headers:
+        Host: ava.game.naver.com.vip.prozect.xyz
+
+  - name: VLESS - login.df.game.naver.com
+    type: vless
+    server: login.df.game.naver.com
+    port: 443
+    uuid: 4d038edf-dbf2-45d8-a7cf-3ca1cdc037a5
+    tls: true
+    servername: ava.game.naver.com.vip.prozect.xyz
+    network: ws
+    ws-opts:
+      path: /vless
+      headers:
+        Host: ava.game.naver.com.vip.prozect.xyz
+
+  # === VMess Nodes ===
+  - name: VMess - ava.game.naver.com
     type: vmess
     server: ava.game.naver.com
     port: 443
     uuid: 3f8a4568-7bb6-42b5-af5d-d92824d5499f
     alterId: 0
     cipher: auto
-    network: ws
     tls: true
-    skip-cert-verify: false
+    servername: ava.game.naver.com.allstorevpn.premm.shop
+    network: ws
     ws-opts:
       path: /vmess
       headers:
         Host: ava.game.naver.com.allstorevpn.premm.shop
 
-  - name: Manual ADDON
+  - name: VMess - login.df.game.naver.com
     type: vmess
-    server: investor.fb.com
+    server: login.df.game.naver.com
     port: 443
     uuid: 3f8a4568-7bb6-42b5-af5d-d92824d5499f
     alterId: 0
     cipher: auto
-    network: ws
     tls: true
-    skip-cert-verify: false
+    servername: ava.game.naver.com.allstorevpn.premm.shop
+    network: ws
     ws-opts:
       path: /vmess
       headers:
-        Host: investor.fb.com.allstorevpn.premm.shop
+        Host: ava.game.naver.com.allstorevpn.premm.shop
 
-  - name: Manual Opok
-    type: vmess
-    server: api.ovo.id
-    port: 80
-    uuid: 3f8a4568-7bb6-42b5-af5d-d92824d5499f
-    alterId: 0
-    cipher: auto
-    network: ws
-    tls: false
-    skip-cert-verify: true
-    udp: true
-    ws-opts:
-      path: /vmess
-      headers:
-        Host: allstorevpn.premm.shop
+proxy-groups:
+  - name: VMess-Auto
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - VMess - ava.game.naver.com
+      - VMess - login.df.game.naver.com
 
-  - name: Manual 0pok2
-    type: vless
-    server: ava.game.naver.com
-    port: 80
-    uuid: I_Love_🇵🇸_sshOcean_b70b
-    cipher: none
-    tls: false
-    network: ws
-    ws-opts:
-      path: /vless
-      headers:
-        Host: vls.simplevpn.my.id
+  - name: VLESS-Auto
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+      - VLESS - ava.game.naver.com
+      - VLESS - login.df.game.naver.com
 
-  - name: Manual VID
-    type: vmess
-    server: ava.game.naver.com
-    port: 443
-    uuid: 5a8ab410-4082-11f0-b631-205c6d5f5d78
-    alterId: 0
-    cipher: auto
-    tls: true
-    network: ws
-    ws-opts:
-      path: /m7g3f4zj
-      headers:
-        Host: simplevpn.my.id
-    servername: simplevpn.my.id
-
-  - name: Manual EX
-    type: trojan
-    server: 104.21.18.144
-    port: 443
-    password: 6884d714-d3c4-4b49-aa20-767ea92837d6
-    tls: true
-    skip-cert-verify: true
-    sni: icecream.955850.xyz
-    network: ws
-    udp: true
-    ws-opts:
-      path: /proxyip=45.67.215.153:443&proxyIP=null
-      headers:
-        Host: icecream.955850.xyz
+  - name: Line
+    type: select
+    proxies:
+      - VLESS-Auto
+      - VMess-Auto
 
 rules:
-  - MATCH,ACC VPN
+  - MATCH,Line

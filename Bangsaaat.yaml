@@ -1,6 +1,6 @@
 proxies:
 - name:  tiktok-indo🥰
-  server: 172.67.144.227
+  server: 18.161.49.87
   type: vmess
   port: 443
   uuid: 21ff4f4f-2bb2-4ecc-a5c3-fc6121359592
